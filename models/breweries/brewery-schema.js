@@ -5,11 +5,6 @@ const schema = mongoose.Schema(
     street: String,
     city: String,
     state: String,
-    comments: [
-      {
-        type: String,
-      },
-    ],
     createdBy: String,
   },
   { collection: "breweries" }
