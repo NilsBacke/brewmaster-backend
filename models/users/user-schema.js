@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema(
     password: String,
     name: String,
     type: String,
-    ownedBrewery: String, // only exists if type === BreweryOwner
+    ownedBreweryId: String, // only exists if type === BreweryOwner
     bookmarkedBreweries: [{ type: String }],
     following: [{ ref: "UserModel", type: mongoose.Schema.Types.ObjectId }],
   },
