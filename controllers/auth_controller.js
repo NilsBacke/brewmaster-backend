@@ -15,6 +15,7 @@ const login = async (req, res) => {
   if (existingUser) {
     existingUser.password = "";
     req.session["profile"] = existingUser;
+    console.log(req.session["profile"]);
     res.json(existingUser);
   } else {
     res.sendStatus(403);

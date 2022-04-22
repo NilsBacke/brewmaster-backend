@@ -9,3 +9,8 @@ export const findUserByCredentials = (username, password) => {
     password: password,
   });
 };
+export const findUserByUsername = (username) => {
+  return userModel.findOne({
+    username,
+  });
+};

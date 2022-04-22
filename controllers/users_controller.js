@@ -8,7 +8,8 @@ const usersController = (app) => {
 
 const findUserById = async (req, res) => {
   const id = req.params.uid;
-  const result = await userDao.findUserById(id);
+  const result =
+    (await userDao.findUserByUsername(id)) ?? (await userDao.findUserById(id));
   res.json(result);
 };
 

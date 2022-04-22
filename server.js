@@ -5,9 +5,9 @@ import breweriesController from "./controllers/breweries_controller.js";
 import usersController from "./controllers/users_controller.js";
 import authController from "./controllers/auth_controller.js";
 import session from "express-session";
-// const CONNECTION_STRING =
-//   process.env.DB_CONNECTION_STRING || "mongodb://localhost:27017/webdev";
-// mongoose.connect(CONNECTION_STRING);
+const CONNECTION_STRING =
+  process.env.DB_CONNECTION_STRING || "mongodb://localhost:27017/brewmaster";
+mongoose.connect(CONNECTION_STRING);
 
 const app = express();
 app.use(express.json());
@@ -18,15 +18,17 @@ app.use(
   })
 );
 
-app.set("trust proxy", 1);
-app.use(
-  session({
-    secret: "123", // TODO: change
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }, // needs HTTPS
-  })
-);
+let sess = {
+  secret: "1231412323124",
+  cookie: { secure: false },
+};
+
+if (process.env.ENV === "production") {
+  app.set("trust proxy", 1);
+  sess.cookie.secure = true;
+}
+
+app.use(session(sess));
 
 breweriesController(app);
 usersController(app);
