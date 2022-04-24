@@ -14,3 +14,6 @@ export const findUserByUsername = (username) => {
     username,
   });
 };
+export const findAllUsers = () => {
+  return userModel.find();
+};

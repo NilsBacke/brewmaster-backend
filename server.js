@@ -5,6 +5,9 @@ import breweriesController from "./controllers/breweries_controller.js";
 import usersController from "./controllers/users_controller.js";
 import authController from "./controllers/auth_controller.js";
 import session from "express-session";
+import dotenv from "dotenv";
+dotenv.config();
+
 const CONNECTION_STRING =
   process.env.DB_CONNECTION_STRING || "mongodb://localhost:27017/brewmaster";
 mongoose.connect(CONNECTION_STRING);

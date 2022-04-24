@@ -26,16 +26,16 @@ const profile = (req, res) => res.json(req.session["profile"]);
 
 const signup = async (req, res) => {
   const newUser = req.body;
-  const existingUser = await userDao.findUserByUsername(req.body.username);
-  if (existingUser) {
-    res.sendStatus(403);
-    return;
-  } else {
-    const insertedUser = await userDao.createUser(newUser);
-    insertedUser.password = "";
-    req.session["profile"] = insertedUser;
-    res.json(insertedUser);
-  }
+  // const existingUser = await userDao.findUserByUsername(req.body.username);
+  // if (existingUser) {
+  //   res.sendStatus(403);
+  //   return;
+  // } else {
+  const insertedUser = await userDao.createUser(newUser);
+  insertedUser.password = "";
+  req.session["profile"] = insertedUser;
+  res.json(insertedUser);
+  // }
 };
 
 const logout = (req, res) => {

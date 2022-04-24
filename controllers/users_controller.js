@@ -4,6 +4,7 @@ const usersController = (app) => {
   app.get("/api/users/:uid", findUserById);
   app.post("/api/users", createUser);
   app.put("/api/users/:uid", updateUser);
+  app.get("/api/users", getAllUsers);
 };
 
 const findUserById = async (req, res) => {
@@ -21,10 +22,19 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const newUser = req.body;
   const id = req.params.uid;
+  const oldUser = await userDao.findUserById(id);
+  const newUser = {
+    ...oldUser,
+    ...req.body,
+  };
   const insertedUser = await userDao.updateUser(id, newUser);
   res.json(insertedUser);
+};
+
+const getAllUsers = async (req, res) => {
+  const result = await userDao.findAllUsers();
+  res.json(result);
 };
 
 export default usersController;
