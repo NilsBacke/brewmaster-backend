@@ -28,7 +28,7 @@ let sess = {
 
 if (process.env.ENV === "production") {
   app.set("trust proxy", 1);
-  sess.cookie.secure = true;
+  sess.cookie = { secure: true, maxAge: 1000 * 60 * 60 * 48, sameSite: "none" };
 }
 
 app.use(session(sess));
