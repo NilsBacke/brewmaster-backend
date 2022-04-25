@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as breweryDao from "../models/breweries/brewery-dao.js";
+import mongoose from "mongoose";
 
 const breweriesController = (app) => {
   app.get("/api/breweries", findAllBreweries);
