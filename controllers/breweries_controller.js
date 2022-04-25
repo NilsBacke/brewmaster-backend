@@ -27,16 +27,22 @@ const findAllBreweries = async (req, res) => {
 
 const findBreweryById = async (req, res) => {
   const id = req.params.uid;
-  const result = await axios.get(
-    `https://api.openbrewerydb.org/breweries/${id}`
-  );
+  try {
+    const result = await axios.get(
+      `https://api.openbrewerydb.org/breweries/${id}`
+    );
 
-  if (result.status !== 200) {
+    if (result.status !== 200) {
+      // check mongodb for brewery id
+      const mongoResult = await breweryDao.findBreweryById(id);
+      res.json(mongoResult);
+    } else {
+      res.json(result.data);
+    }
+  } catch {
     // check mongodb for brewery id
     const mongoResult = await breweryDao.findBreweryById(id);
     res.json(mongoResult);
-  } else {
-    res.json(result.data);
   }
 };
 
