@@ -1,4 +1,5 @@
 import * as userDao from "../models/users/user-dao.js";
+import mongoose from "mongoose";
 
 const usersController = (app) => {
   app.get("/api/users/:uid", findUserById);
@@ -25,9 +26,10 @@ const updateUser = async (req, res) => {
   const id = req.params.uid;
   const oldUser = await userDao.findUserById(id);
   const newUser = {
-    ...oldUser,
+    password: oldUser.password,
     ...req.body,
   };
+  newUser.following = newUser.following.map((f) => mongoose.Types.ObjectId(f));
   const insertedUser = await userDao.updateUser(id, newUser);
   res.json(insertedUser);
 };
