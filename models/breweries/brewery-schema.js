@@ -5,7 +5,8 @@ const schema = mongoose.Schema(
     street: String,
     city: String,
     state: String,
-    createdBy: String,
+    createdBy: { ref: "UserModel", type: mongoose.Schema.ObjectId },
+    websiteUrl: String,
   },
   { collection: "breweries" }
 );
