@@ -10,8 +10,7 @@ const breweriesController = (app) => {
 };
 
 const findAllBreweries = async (req, res) => {
-  // const mongoResults = await breweryDao.findAllBreweries();
-  const mongoResults = [];
+  const mongoResults = await breweryDao.findAllBreweries();
   let result = {};
   if (req.query.search && req.query.search.length > 0) {
     result = await axios.get(
