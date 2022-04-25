@@ -42,6 +42,7 @@ const findBreweryById = async (req, res) => {
 const createBrewery = async (req, res) => {
   const newBrewery = req.body;
   newBrewery._id = new Date().getTime() + "";
+  newBrewery.createdBy = mongoose.Types.ObjectId(newBrewery.createdBy);
   const insertedBrewery = await breweryDao.createBrewery(newBrewery);
   res.json(insertedBrewery);
 };
